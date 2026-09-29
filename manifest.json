@@ -1,22 +1,18 @@
 {
   "Version": 1,
   "Guid": "c9ab58ef-9dca-47af-8acf-a9302af64891",
-  "Name": "HD2 Better Tanks v1.0.0",
-  "Description": "Configurable Bastion + Storm tank overhaul with armor, durability, handling, ammunition, fire rate, reload timing, smoke/missile capacity, cooldowns, and optional integrated Tank HUD.",
+  "Name": "HD2 Better Tanks v1.1.0 RC2",
+  "Description": "Test release: Better Tanks drivetrain improvements, per-rack Storm missile capacity fix, and DRIVER HUD 1.5.0-based integrated compatibility HUD.",
   "Options": [
     {
       "Name": "Core - Better Tanks",
       "Description": "Required Better Tanks gameplay and configuration modules.",
-      "Include": [
-        "Core"
-      ]
+      "Include": ["Core"]
     },
     {
       "Name": "Integrated Tank HUD",
-      "Description": "Optional Better Tanks tank HUD.",
-      "Include": [
-        "TankHUD_Integrated"
-      ]
+      "Description": "Optional Better Tanks-compatible DRIVER HUD 1.5.0 fork. Do not enable upstream DRIVER HUD Core at the same time.",
+      "Include": ["TankHUD_Integrated"]
     }
   ]
 }
