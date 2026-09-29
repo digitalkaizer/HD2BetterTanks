@@ -1,0 +1,94 @@
+--- /mnt/data/current_fixed_src/core.lua	1980-01-01 00:00:00.000000000 +0000
++++ /mnt/data/HD2_Better_Tanks_v1.1.0_RC1_Source/core.lua	2026-09-29 17:54:29.428375520 +0000
+@@ -4,7 +4,7 @@
+ 
+ local Common=require('mods/digitalkaizer/better_tanks_common')
+ 
+--- HD2 Better Tanks v1.0.0
++-- HD2 Better Tanks v1.1.0 RC1
+ -- Bingus Shared Loader / Arsenal runtime patch for Helldivers 2.
+ -- Master-config driven Bastion + Storm tank customization.
+ 
+@@ -27,6 +27,9 @@
+     bastion_steering_response=8,
+     bastion_throttle_response=8,
+     bastion_brake_response=10,
++    tracked_clutch_delay_seconds=0.0,
++    tracked_top_speed_scale=1.2,
++    tracked_driving_turn_scale=1.2,
+     bastion_unknown_tracked_coefficient_1=1,
+     bastion_unknown_tracked_coefficient_2=22,
+     bastion_unknown_tracked_coefficient_3=3,
+@@ -90,6 +93,9 @@
+     bastion_steering_response={0,1000,false},
+     bastion_throttle_response={0,1000,false},
+     bastion_brake_response={0,1000,false},
++    tracked_clutch_delay_seconds={0,10,false},
++    tracked_top_speed_scale={0.5,2.0,false},
++    tracked_driving_turn_scale={0.5,2.0,false},
+     bastion_unknown_tracked_coefficient_1={0,1000,false},
+     bastion_unknown_tracked_coefficient_2={0,1000,false},
+     bastion_unknown_tracked_coefficient_3={0,1000,false},
+@@ -212,13 +218,27 @@
+ # Lowering it from default seemed pointless. But Somewhere between 4 and 10 felt OK
+ bastion_steering_response=8.0
+ 
+-# Throttle response. Stock/default: 4.0; exact formula/unit unknown.
++# Throttle input ramp rate. The game has two internal throttle ramp fields.
++# Stock/defaults: 4.0 / 5.0. Better Tanks writes this value to BOTH fields.
+ bastion_throttle_response=8.0
+ 
+-# Brake response. Stock/default: 10.0; exact formula/unit unknown.
+-# Adjusting this value seemed to make little difference in any case.
++# Brake input ramp rate. The game has two internal brake ramp fields.
++# Stock/defaults: 10.0 / 5.0. Better Tanks writes this value to BOTH fields.
+ bastion_brake_response=10.0
+ 
++# Shared Havok tracked-vehicle drivetrain settings. These currently apply to tracked player vehicles
++# at the runtime Havok layer rather than being addressable separately by Bastion/Storm identity.
++# Clutch delay controls the pause when changing forward/neutral/reverse. Stock tank value: ~0.4 sec.
++tracked_clutch_delay_seconds=0.0
++
++# 1.0 = vanilla drivetrain gearing/torque. 1.2 raises geared top speed by ~20% while also
++# raising max engine torque by the same factor to preserve approximately stock wheel torque.
++tracked_top_speed_scale=1.2
++
++# 1.0 = vanilla Havok steering envelope. This scales max steering angle and the speed at which
++# full steering angle is available. It does NOT directly change the neutral/pivot-turn cap.
++tracked_driving_turn_scale=1.2
++
+ # Five unnamed VehicleTracksComponent coefficients.
+ # It is not well known what these values manipulate exactly.
+ # However I have found little noticeable differences in trying to slightly or greatly
+@@ -292,7 +312,9 @@
+ 
+ storm_acceleration=13.0
+ storm_steering_response=8.0
++# Writes both internal throttle ramp fields (stock 4.0 / 5.0).
+ storm_throttle_response=8.0
++# Writes both internal brake ramp fields (stock 10.0 / 5.0).
+ storm_brake_response=10.0
+ storm_unknown_tracked_coefficient_1=1.0
+ storm_unknown_tracked_coefficient_2=22.0
+@@ -396,7 +418,7 @@
+ local config,config_path,config_notes=load_config()
+ 
+ local state={
+-    revision='hd2-better-tanks-v1.0.0-core',
++    revision='hd2-better-tanks-v1.1.0-rc1-core',
+     active=false,done=false,writes=0,attempts=0,status='installed',
+     config=config,config_path=config_path
+ }
+@@ -995,8 +1017,10 @@
+     local fields={
+         {0,10.0,config[prefix..'_acceleration'],'acceleration'},
+         {364,2.25,config[prefix..'_steering_response'],'steering_response'},
+-        {368,4.0,config[prefix..'_throttle_response'],'throttle_response'},
+-        {376,10.0,config[prefix..'_brake_response'],'brake_response'},
++        {368,4.0,config[prefix..'_throttle_response'],'throttle_response_a'},
++        {372,5.0,config[prefix..'_throttle_response'],'throttle_response_b'},
++        {376,10.0,config[prefix..'_brake_response'],'brake_response_a'},
++        {380,5.0,config[prefix..'_brake_response'],'brake_response_b'},
+     }
+     for _,x in ipairs(fields) do
+         local ok,why=action_u32(
