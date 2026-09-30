@@ -100,4 +100,3 @@ Ko-fi: https://ko-fi.com/digitalkaizer
 
 - **CowboyBingus** — Bingus Shared Loader, Mod Options Menu, and the HD2 modding ecosystem that makes this possible.
 - **FireScallion / Driver HUD developer** — Driver HUD compatibility/HUD work used by Tank Config under the included MIT notice.
-- **IvoryApples** — 360 Turret Mod compatibility.
