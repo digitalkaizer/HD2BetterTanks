@@ -1,19 +1,19 @@
 {
   "Version": 1,
   "Guid": "c9ab58ef-9dca-47af-8acf-a9302af64891",
-  "Name": "HD2 Better Tanks v1.0.0",
-  "Description": "Configurable Bastion + Storm tank overhaul with armor, durability, handling, ammunition, fire rate, reload timing, smoke/missile capacity, cooldowns, and optional integrated Tank HUD.",
+  "Name": "Tank Config v1.1.0",
+  "Description": "Configurable TD-220 Bastion and TD-110 Maelstrom durability, armor, handling, weapons, ammunition, utility, cooldown and fire-control settings through CowboyBingus Mod Options Menu.",
   "Options": [
     {
-      "Name": "Core - Better Tanks",
-      "Description": "Required Better Tanks gameplay and configuration modules.",
+      "Name": "Core - Tank Config",
+      "Description": "Required Tank Config gameplay and Mod Options Menu integration.",
       "Include": [
         "Core"
       ]
     },
     {
       "Name": "Integrated Tank HUD",
-      "Description": "Optional Better Tanks tank HUD.",
+      "Description": "Optional integrated tank health and ammunition HUD.",
       "Include": [
         "TankHUD_Integrated"
       ]
