@@ -1,0 +1,13 @@
+Tank Config v1.1.0 Credits
+
+CowboyBingus
+- Bingus Shared Loader
+- CowboyBingus Mod Options Menu
+- Major contributions to the Helldivers 2 modding ecosystem
+
+FireScallion / Driver HUD developer
+- Driver HUD compatibility and HUD-related code used by Tank Config
+- See THIRD_PARTY_LICENSE.txt for the applicable MIT notice
+
+IvoryApples
+- 360 Turret Mod, compatible with Tank Config
