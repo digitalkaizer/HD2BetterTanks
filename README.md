@@ -1,61 +1,103 @@
-# HD2 Better Tanks v1.0.0
+# Tank Config v1.1.0
 
-A configurable overhaul for the TD-220 Bastion and TD-110 Storm/Maelstrom tanks.
+Tank Config is a configurable overhaul for the **TD-220 Bastion** and **TD-110 Maelstrom** in Helldivers 2. It exposes tank durability, armor, handling, weapons, ammunition, utility systems, cooldowns and fire-control layout through CowboyBingus' Mod Options Menu.
+
+All user-facing defaults are vanilla. With a few exceptions, adjustable values are intentionally constrained to roughly **50% to 200% of stock vanilla values**, giving you room to tune the tanks to your preferred balance without turning every option into an unlimited cheat slider.
 
 ## Requirements
 
 - Helldivers 2
-- Bingus Shared Loader v15+ / API 1
-- Arsenal-compatible mod loader/installer
-
-## Configuration
-
-The master configuration is:
-
-`%LOCALAPPDATA%\CowboyBingus\Helldivers2\Config\digitalKaizer-BetterTanks.ini`
-
-The mod creates the config on first run if it is missing. Restart Helldivers 2 after changing settings unless noted otherwise in the config.
-
-The shipped config contains the default Better Tanks balance preset. Each option documents the original game value where known, so users can tune or restore individual settings themselves.
-
-## Features
-
-- Bastion and Storm main health
-- Constitution and destruction countdown behavior
-- Configurable frontal, stowage, side-skirt, and additional structural armor zones
-- Main-health damage transfer by armor-zone group
-- Explosive damage taken
-- Acceleration and handling parameters
-- Five experimental tracked-vehicle coefficients
-- Bastion cannon ammunition, HMG ammunition, fire rates, and cannon reload time
-- Storm Gatling belt size, spare belts, fire rate, and reload time
-- Storm smoke capacity and delay
-- Storm rear-missile capacity
-- Bastion and Storm stratagem cooldowns
-- Optional integrated tank HUD that follows configured health and ammunition values
+- Bingus Shared Loader v18+
+- CowboyBingus Mod Options Menu v1.0.1+
+- Arsenal for the supported installation method
 
 ## Installation
 
-Install the archive through Arsenal and enable **Core - Better Tanks**.
+Install the archive through **Arsenal** and enable **Core - Tank Config**.
 
-The **Integrated Tank HUD** option is optional. Do not enable another tank HUD that replaces the same runtime data at the same time.
+The **Integrated Tank HUD** option is optional. It displays tank health and ammunition using Tank Config's configured values and live vehicle state.
 
-## Log
+No manual-install support is provided.
 
-Runtime information is written to:
+## Configuration
 
-`%LOCALAPPDATA%\CowboyBingus\Helldivers2\Logs\HD2BetterTanks.log`
+Open **ESC -> MODS** and configure Tank Config from its three sections:
+
+- **Tank Config: General** — shared durability, armor, damage transfer, handling, traction and stratagem cooldown settings.
+- **Tank Config: Bastion** — cannon/HMG ammunition, fire rate, reload time and fire-control layout.
+- **Tank Config: Maelstrom** — Gatling ammunition, spare belts, reload time, fire rate, smoke, rear missiles and fire-control layout.
+
+Press **APPLY** after changing settings. Some structural or template-based changes are guaranteed on the next freshly spawned tank.
+
+## General Features
+
+- Main health
+- Destroyed-tank secondary explosion delay
+- Frontal, stowage, side-skirt and structural hull armor classes
+- Stowage, side-skirt and other hull-zone damage transfer to main health
+- Explosive damage received
+- Acceleration
+- Steering response
+- Throttle response
+- Brake response
+- Clutch delay
+- Geared top speed
+- Driving turn authority
+- Track traction
+- Tank stratagem cooldown
+
+Armor choices are **Light (AV2), Medium (AV3), Heavy (AV4), and Tank (AV5)**.
+
+## Bastion Features
+
+- Cannon total shells
+- Coaxial HMG ammunition
+- Cannon fire rate
+- HMG fire rate
+- Cannon reload time
+- Standard or inverted fire-control layout
+
+## Maelstrom Features
+
+- Gatling rounds per belt: **300-1000**
+- Spare Gatling belts: **3-6**
+- Gatling reload time
+- Combined Gatling fire rate
+- Smoke charges
+- Smoke launch delay
+- Rear missiles
+- Standard or inverted fire-control layout
+
+## Integrated Tank HUD
+
+The optional integrated HUD displays live tank health and ammunition for supported tank seats. It follows configured Bastion and Maelstrom capacities, including Maelstrom Gatling belts and rear missiles.
+
+The HUD includes compatibility work derived from **Driver HUD**. See `THIRD_PARTY_LICENSE.txt` and `CREDITS.txt`.
 
 ## Compatibility
 
-Do not simultaneously use other mods that edit the same tank health, armor, handling, ammunition, weapon timing, smoke, missile-capacity, cooldown, or HUD data.
+- Compatible with **360 Turret Mod** by **IvoryApples**: https://ayakamods.com/members/ivoryapples.399599/
+- Mostly compatible with **World of Tanks: Solo Driver** by **M!ni$try0fSc!eиce**. UI problems caused by Solo Driver are outside Tank Config and cannot be reliably corrected by a Tank Config compatibility patch.
+- If using Solo Driver, load it **before Tank Config** so Tank Config's fire-control layout can take precedence.
+- Avoid combining Tank Config with other mods that directly edit the same tank health, armor, handling, ammunition, weapon timing, smoke, missile-capacity, cooldown or HUD data.
 
-## v1.0.0 hotfix
+## Downloads
 
-The current v1.0.0 build fixes the remaining Bastion HMG HUD validation limit so custom HMG capacities above the vanilla 2000-round value are correctly picked up by the integrated Tank HUD.
+- Nexus Mods: https://www.nexusmods.com/helldivers2/mods/16771
+- GitHub Releases: https://github.com/digitalkaizer/HD2TankConfig/releases
 
-## Notes
+## Logs
 
-Some tracked-vehicle fields are still not fully understood. The config identifies those settings conservatively rather than assigning unsupported names to them.
+Tank Config writes runtime information to:
 
-A third-party license notice is included where legally required.
+`%LOCALAPPDATA%\CowboyBingus\Helldivers2\Logs\TankConfig.log`
+
+## Support
+
+Ko-fi: https://ko-fi.com/digitalkaizer
+
+## Credits
+
+- **CowboyBingus** — Bingus Shared Loader, Mod Options Menu, and the HD2 modding ecosystem that makes this possible.
+- **FireScallion / Driver HUD developer** — Driver HUD compatibility/HUD work used by Tank Config under the included MIT notice.
+- **IvoryApples** — 360 Turret Mod compatibility.
